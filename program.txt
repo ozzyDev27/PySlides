@@ -1,0 +1,51 @@
+slide firstslide {
+    def init() {
+        debug "this is a debug message that prints to console";
+        background = "background.png"
+        text cooltext;
+        cooltext.fontSize = 24;
+        cooltext.font = Rubik;
+        cooltext.anchorPoint = W; //its position is calculated from the center left of it
+        cooltext.positionx = 0; //is calculated in percents, so its at the very left of the screen and centered vertically
+        cooltext.positiony = 50;
+        debug width; //prints out screen width in pixels
+        show cooltext; //actually packs cooltext to the screen
+    }
+
+    def loop(time) { //time variable is how much time has elapsed since the slide has started existing
+        cooltext.opacity = (sin(time/1000) * 50) + 50;
+    }
+    def out(time, outtime) {  //transitioning out after pressing the space bar. the "outtime" variable is how much time in ms has passed after pressing the space bar. the "time" variable is the same as in the loop function.
+        cooltext.opacity = (sin(time) * 50) + 50;
+        cooltext.positionx = outtime * 0.05; //will move the slide to the right of the screen over 2 seconds.
+        if time > 2000 {
+            nextslide;
+        } 
+    }
+}
+slide otherslide {
+    def init() {
+        debug "this is a debug message that prints to console";
+        background = "otherbackground.png"
+        image epicimage "image.png";
+        epicimage.scale = 1.2;
+        epicimage.hue = 2; //shifts the hue by 2% - it is 0% by default.
+        epicimage.anchorPoint = C; //its position is calculated from the center of it
+        epicimage.positionx = 50; //fully centered
+        epicimage.positiony = 50;
+        debug height; //prints out screen height in pixels
+        show epicimage; //actually packs cooltext to the screen
+    }
+
+    def loop(time) { //time variable is how much time has elapsed since the slide has started existing
+        if time < 2000 {
+            epicimage.opacity =  time / 20; //slowly fades in when you first enter the slide 
+        }
+        epicimage.rotation = sin(time) * 5; //slowly rotates back and forth
+    }
+}
+
+def main() {
+    setslides firstslide, otherslide; //shows the order of the slides
+    start;
+}
