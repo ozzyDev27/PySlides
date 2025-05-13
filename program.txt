@@ -13,10 +13,10 @@ slide firstslide {
     }
 
     def loop(time) { //time variable is how much time has elapsed since the slide has started existing
-        cooltext.opacity = (sin(time/1000) * 50) + 50;
+        cooltext.opacity = (sin(time/1000) * 25) + 75;
     }
     def out(time, outtime) {  //transitioning out after pressing the space bar. the "outtime" variable is how much time in ms has passed after pressing the space bar. the "time" variable is the same as in the loop function.
-        cooltext.opacity = (sin(time) * 50) + 50;
+        cooltext.opacity = (sin(time) * 25) + 75;
         cooltext.positionx = outtime * 0.05; //will move the slide to the right of the screen over 2 seconds.
         if time > 2000 {
             nextslide;
